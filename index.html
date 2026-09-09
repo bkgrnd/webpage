@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bkgrnd's Desktop</title>
+  <!-- Windows 98 CSS Library -->
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+  <style>
+    body {
+      background-color: #008080; /* Classic Windows Teal */
+      font-family: "Pixelated MS Sans Serif", "MS Sans Serif", Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .desktop-container {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .profile-header {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border: 2px inset #fff;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .skill-bar {
+      font-family: monospace;
+      letter-spacing: 1px;
+    }
+
+    .disclaimer-box {
+      background-color: #fff;
+      border: 2px inset #dfdfdf;
+      padding: 10px;
+    }
+
+    .project-item {
+      margin-bottom: 12px;
+    }
+
+    .project-item:last-child {
+      margin-bottom: 0;
+    }
+
+    ul {
+      margin: 5px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="desktop-container">
+
+    <!-- WINDOW 1: ABOUT ME -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">info.exe</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="profile-header">
+          <img src="avatar.png" alt="bkgrnd avatar" class="avatar">
+          <div>
+            <h2 style="margin: 0 0 5px 0;">bkgrnd</h2>
+            <p style="margin: 0;">HAIII! Just a 16yo from Bulgaria.</p>
+            <p style="margin: 0;"> I make dumb projects, and im also the creator of the Reverse Project.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WINDOW 2: MUSIC CONTROLLER -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">music.exe</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <p style="margin: 0 0 10px 0;"><strong>Track:</strong> Windows Breakcore</p>
+        
+        <div class="field-row" style="margin-bottom: 10px;">
+          <label for="volume-control">Volume:</label>
+          <input id="volume-control" type="range" min="0" max="1" step="0.05" value="0.5" style="flex: 1;">
+        </div>
+
+        <div class="field-row">
+          <input type="checkbox" id="mute-control" checked>
+          <label for="mute-control">Mute sound</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- WINDOW 3: AI DISCLAIMER -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">disclamer.exe</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="disclaimer-box">
+          <p style="margin: 0;">
+            This entire site is <strong>vibecoded</strong>. I'm quite an avid user of Artificial Intelligence (mainly because it'll be something I'll be learning in a year or so in school), using it mainly to experiment with stuff and also using image generation models via Stability Matrix for shits and giggles. I also have not practiced any of the below-mentioned skills in a few years so im quite rusty.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- WINDOW 4: SKILLS -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">skills.exe</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <ul>
+          <li><strong>Python</strong> <span class="skill-bar">[######--]</span> Pretty good</li>
+          <li><strong>C++</strong> <span class="skill-bar">[####----]</span> Meh, I'd say decent maybe?</li>
+          <li><strong>Golang</strong> <span class="skill-bar">[#-------]</span> Hello, World!</li>
+          <li><strong>Rust</strong> <span class="skill-bar">[#-------]</span> Hello, World!</li>
+          <li><strong>C#</strong> <span class="skill-bar">[##------]</span> Pretty bad at it</li>
+          <li><strong>Lua</strong> <span class="skill-bar">[###-----]</span> HALF a Roblox game and one brainfuck interpreter</li>
+          <li><strong>HTML & Web Dev</strong> <span class="skill-bar">[##------]</span> Quite garbage at it</li>
+          <li><i>I know that I know nothing</i></li>
+          <li><strong>Disclamer:</strong> i havent practiced these skills in a few years so im quite rusty</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WINDOW 5: NOTABLE PROJECTS -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">projects.exe</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="project-item">
+          <strong>Factory Game</strong>
+          <p style="margin: 2px 0 0 0;">Stupid TUI factory game I made for s%^ts and giggles.</p>
+        </div>
+        <hr>
+        <div class="project-item">
+          <strong>Cropmate</strong>
+          <p style="margin: 2px 0 0 0;">Utility mod for Hypixel Skyblock.</p>
+        </div>
+        <hr>
+        <div class="project-item">
+          <strong>The Reverse Project</strong>
+          <p style="margin: 2px 0 0 0;">Simulated operating system built in Python. Used to be my main thing for ~3 years.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- WINDOW 6: INTERESTS & HOBBIES -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">hobbies.exe</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <ul>
+          <li><strong>BMX</strong></li>
+          <li><strong>Mountain Biking</strong></li>
+          <li><strong>Gaming</strong></li>
+          <li><strong>Hanging out with friends</strong></li>
+          <li><strong>CAD modelling</strong></li>
+          <li><strong>Gamedev</strong></li>
+          <li><strong>FPV/drones</strong></li>
+          <li><strong>Just living life</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- WINDOW 7: REACH ME -->
+    <div class="window">
+      <div class="title-bar">
+        <div class="title-bar-text">contact.exe</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Maximize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <p style="margin: 0 0 10px 0;"><strong>Discord:</strong> @bkgrnd</p>
+        <button onclick="window.open('https://github.com/bkgrnd', '_blank')">Open GitHub: github.com/bkgrnd</button>
+        <p style="margin: 0 0 10px 0;">Made with ❤️ By bkgrnd on <strong>09/09/2026</strong></p>
+      </div>
+    </div>
+
+  </div>
+
+  <audio id="audio-player" src="bgm.mp3" loop muted autoplay></audio>
+
+  <script>
+    const audio = document.getElementById('audio-player');
+    const volumeSlider = document.getElementById('volume-control');
+    const muteCheckbox = document.getElementById('mute-control');
+
+    // Ensure audio starts muted
+    audio.muted = true;
+    audio.volume = volumeSlider.value;
+
+    // Autoplay muted track on load
+    audio.play();
+
+    // Volume Slider Handler
+    volumeSlider.addEventListener('input', (e) => {
+      audio.volume = e.target.value;
+      if (audio.volume > 0 && audio.muted) {
+        audio.muted = false;
+        muteCheckbox.checked = false;
+      }
+    });
+
+    // Mute Checkbox Handler
+    muteCheckbox.addEventListener('change', (e) => {
+      audio.muted = e.target.checked;
+      if (!audio.muted) {
+        audio.play();
+      }
+    });
+  </script>
+
+</body>
+</html>
