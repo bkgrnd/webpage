@@ -70,6 +70,40 @@
       align-items: center;
       gap: 10px;
     }
+
+    /* Music Player Layout */
+    .music-player {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .song-cover {
+      width: 80px;
+      height: 80px;
+      border: 2px inset #fff;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .music-controls {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 5px;
+    }
+
+    .time-display {
+      font-family: monospace;
+      font-size: 11px;
+      width: 45px;
+      text-align: right;
+    }
   </style>
 </head>
 <body>
@@ -91,8 +125,8 @@
           <img src="avatar.png" alt="bkgrnd avatar" class="avatar">
           <div>
             <h2 style="margin: 0 0 5px 0;">bkgrnd</h2>
-            <p style="margin: 0;">HAIII! Just a 16yo from Bulgaria.</p>
-            <p style="margin: 0;"> I make dumb projects, and im also the creator of the Reverse Project.</p>
+            <p style="margin: 0 0 4px 0;">HAIII! Just a 16yo from Bulgaria.</p>
+            <p style="margin: 0;">CREATOR!!!!!!1111 of the Reverse Project</p>
           </div>
         </div>
       </div>
@@ -109,15 +143,36 @@
         </div>
       </div>
       <div class="window-body">
-        <p style="margin: 0 0 10px 0;"><strong>Track:</strong> Windows Breakcore</p>
-        
-        <div class="field-row" style="margin-bottom: 10px;">
+        <div class="music-player">
+          <img src="cover.jpg" alt="Song Cover" class="song-cover">
+          <div class="music-controls">
+            <p style="margin: 0;"><strong>Track:</strong> Windows 98 Breakcore by Neutronium</p>
+            
+            <!-- Seek Progress Bar -->
+            <div class="field-row">
+              <input id="seek-bar" type="range" min="0" value="0" step="0.1" style="flex: 1;">
+              <span id="time-display" class="time-display">0:00</span>
+            </div>
+
+            <!-- Playback Buttons -->
+            <div class="btn-group">
+              <button id="btn-prev" style="min-width: 40px;">&lt;&lt;</button>
+              <button id="btn-play" style="min-width: 50px;">Play</button>
+              <button id="btn-next" style="min-width: 40px;">&gt;&gt;</button>
+            </div>
+          </div>
+        </div>
+
+        <hr style="margin: 10px 0;">
+
+        <!-- Volume & Mute Controls -->
+        <div class="field-row" style="margin-bottom: 5px;">
           <label for="volume-control">Volume:</label>
           <input id="volume-control" type="range" min="0" max="1" step="0.05" value="0.5" style="flex: 1;">
         </div>
 
         <div class="field-row">
-          <input type="checkbox" id="mute-control" checked>
+          <input type="checkbox" id="mute-control">
           <label for="mute-control">Mute sound</label>
         </div>
       </div>
@@ -136,7 +191,7 @@
       <div class="window-body">
         <div class="disclaimer-box">
           <p style="margin: 0;">
-            This entire site is <strong>vibecoded</strong>. I'm quite an avid user of Artificial Intelligence (mainly because im dumb and im fascinated because we made a rock think (and because ill be learning about it at school so free grades i guess)), using it mainly to experiment with stuff and also using image generation models via Stability Matrix for shits and giggles. I also have not practiced any of the below-mentioned skills in a few years so im quite rusty.
+            This entire site is <strong>vibecoded</strong>. I'm quite an avid user of Artificial Intelligence (mainly because it'll be something I'll be learning in a year or so in school), using it mainly to experiment with stuff and also using image generation models via Stability Matrix for shits and giggles. I also have not practiced any of the below-mentioned skills in a few years so im quite rusty.
           </p>
         </div>
       </div>
@@ -232,25 +287,75 @@
       <div class="window-body">
         <p style="margin: 0 0 10px 0;"><strong>Discord:</strong> @bkgrnd</p>
         <button onclick="window.open('https://github.com/bkgrnd', '_blank')">Open GitHub: github.com/bkgrnd</button>
-        <p style="margin: 0 0 10px 0;">Made with ❤️ By bkgrnd on <strong>09/09/2026</strong></p>
+        <p style="margin: 10px 0 0 0;">Made with ❤️ By bkgrnd on <strong>10/09/2026</strong></p>
       </div>
     </div>
 
   </div>
 
-  <audio id="audio-player" src="bgm.mp3" loop muted autoplay></audio>
+  <audio id="audio-player" src="bgm.mp3" loop autoplay></audio>
 
   <script>
     const audio = document.getElementById('audio-player');
     const volumeSlider = document.getElementById('volume-control');
     const muteCheckbox = document.getElementById('mute-control');
+    const playBtn = document.getElementById('btn-play');
+    const prevBtn = document.getElementById('btn-prev');
+    const nextBtn = document.getElementById('btn-next');
+    const seekBar = document.getElementById('seek-bar');
+    const timeDisplay = document.getElementById('time-display');
 
-    // Ensure audio starts muted
-    audio.muted = true;
+    audio.muted = false;
     audio.volume = volumeSlider.value;
 
-    // Autoplay muted track on load
-    audio.play();
+    // Format time in MM:SS
+    function formatTime(secs) {
+      const mins = Math.floor(secs / 60);
+      const remainingSecs = Math.floor(secs % 60);
+      return `${mins}:${remainingSecs.toString().padStart(2, '0')}`;
+    }
+
+    // Update play button state
+    audio.addEventListener('play', () => playBtn.textContent = 'Pause');
+    audio.addEventListener('pause', () => playBtn.textContent = 'Play');
+
+    // Play/Pause button handler
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+
+    // Skip backward 10s
+    prevBtn.addEventListener('click', () => {
+      audio.currentTime = Math.max(0, audio.currentTime - 10);
+    });
+
+    // Skip forward 10s
+    nextBtn.addEventListener('click', () => {
+      audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+    });
+
+    // Update seeker maximum when metadata loads
+    audio.addEventListener('loadedmetadata', () => {
+      seekBar.max = audio.duration;
+    });
+
+    // Update progress bar and time during playback
+    audio.addEventListener('timeupdate', () => {
+      if (!isNaN(audio.duration)) {
+        seekBar.max = audio.duration;
+        seekBar.value = audio.currentTime;
+        timeDisplay.textContent = formatTime(audio.currentTime);
+      }
+    });
+
+    // Seek when user drags bar
+    seekBar.addEventListener('input', () => {
+      audio.currentTime = seekBar.value;
+    });
 
     // Volume Slider Handler
     volumeSlider.addEventListener('input', (e) => {
