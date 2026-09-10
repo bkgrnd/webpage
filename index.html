@@ -104,6 +104,20 @@
       width: 45px;
       text-align: right;
     }
+
+    /* Styling details/collapsibles for Windows 98 feel */
+    details {
+      margin-bottom: 8px;
+    }
+
+    details summary {
+      cursor: pointer;
+    }
+
+    .hobby-content {
+      margin: 5px 0 5px 15px;
+      white-space: pre-line;
+    }
   </style>
 </head>
 <body>
@@ -261,16 +275,46 @@
         </div>
       </div>
       <div class="window-body">
-        <ul>
-          <li><strong>BMX</strong></li>
-          <li><strong>Mountain Biking</strong></li>
-          <li><strong>Gaming</strong></li>
-          <li><strong>Hanging out with friends</strong></li>
-          <li><strong>CAD modelling</strong></li>
-          <li><strong>Gamedev</strong></li>
-          <li><strong>FPV/drones</strong></li>
-          <li><strong>Just living life</strong></li>
-        </ul>
+        <details>
+          <summary><strong>BMX</strong></summary>
+          <p class="hobby-content">i currently own a 18.5 inch top tube bmx and its quite hard to ride but atleast its something yk?</p>
+        </details>
+
+        <details>
+          <summary><strong>Mountain Biking</strong></summary>
+          <p class="hobby-content">i currently own and ride an interbike gts 29-er with tektro HYDRAULIC!!!111 disk brakes and all shimano drive-train</p>
+        </details>
+
+        <details>
+          <summary><strong>Gaming</strong></summary>
+          <p class="hobby-content">gaming has been a part of my life since i was a wee lad, some of favourite games of all time are:
+Minecraft
+Missed Messages.
+Assetto Corsa
+Hacknet
+Balatro
+Pretty much all gta games except the first top down ones</p>
+        </details>
+
+        <details>
+          <summary><strong>Hanging out with friends</strong></summary>
+          <p class="hobby-content">i may not have many but geniunely i love them because they are there for me, thanks guys!</p>
+        </details>
+
+        <details>
+          <summary><strong>CAD modelling</strong></summary>
+          <p class="hobby-content">im pretty bad at it but atleast i can model stuff i need, and also make design concepts for balisongs (my favourite kind of knife)</p>
+        </details>
+
+        <details>
+          <summary><strong>FPV/drones</strong></summary>
+          <p class="hobby-content">im in the process of getting an fpv license so i can fly legally, current drone is the aquila 16 BUUUUUUT i will be upgrading to either a geprc t-cube 18 or a kayoumini</p>
+        </details>
+
+        <details>
+          <summary><strong>Just living life</strong></summary>
+          <p class="hobby-content">life is to be lived.</p>
+        </details>
       </div>
     </div>
 
