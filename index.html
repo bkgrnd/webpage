@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>bkgrnd's webpage</title>
+  <title>bkgrnd's Desktop</title>
   <!-- Windows 98 CSS Library -->
   <link rel="stylesheet" href="https://unpkg.com/98.css">
   <style>
@@ -158,9 +158,9 @@
       </div>
       <div class="window-body">
         <div class="music-player">
-          <img src="cover.jpg" alt="Song Cover" class="song-cover">
+          <img id="song-cover" src="cover.jpg" alt="Song Cover" class="song-cover">
           <div class="music-controls">
-            <p style="margin: 0;"><strong>Track:</strong> Windows 98 Breakcore by Neutronium</p>
+            <p style="margin: 0;"><strong>Track:</strong> <span id="song-title">Windows 98 Breakcore by Neutronium</span></p>
             
             <!-- Seek Progress Bar -->
             <div class="field-row">
@@ -337,9 +337,24 @@ Pretty much all gta games except the first top down ones</p>
 
   </div>
 
-  <audio id="audio-player" src="bgm.mp3" loop autoplay></audio>
+  <audio id="audio-player" src="bgm.mp3" autoplay></audio>
 
   <script>
+    const playlist = [
+      {
+        title: "Windows 98 Breakcore by Neutronium",
+        src: "bgm.mp3",
+        cover: "cover.jpg"
+      },
+      {
+        title: "Windows Breakcore by proloxx",
+        src: "bgm2.mp3",
+        cover: "cover2.jpg"
+      }
+    ];
+
+    let currentTrackIndex = 0;
+
     const audio = document.getElementById('audio-player');
     const volumeSlider = document.getElementById('volume-control');
     const muteCheckbox = document.getElementById('mute-control');
@@ -348,22 +363,31 @@ Pretty much all gta games except the first top down ones</p>
     const nextBtn = document.getElementById('btn-next');
     const seekBar = document.getElementById('seek-bar');
     const timeDisplay = document.getElementById('time-display');
+    const songTitle = document.getElementById('song-title');
+    const songCover = document.getElementById('song-cover');
 
     audio.muted = false;
     audio.volume = volumeSlider.value;
 
-    // Format time in MM:SS
+    function loadTrack(index) {
+      currentTrackIndex = index;
+      const track = playlist[currentTrackIndex];
+      audio.src = track.src;
+      songTitle.textContent = track.title;
+      songCover.src = track.cover;
+      seekBar.value = 0;
+      timeDisplay.textContent = "0:00";
+    }
+
     function formatTime(secs) {
       const mins = Math.floor(secs / 60);
       const remainingSecs = Math.floor(secs % 60);
       return `${mins}:${remainingSecs.toString().padStart(2, '0')}`;
     }
 
-    // Update play button state
     audio.addEventListener('play', () => playBtn.textContent = 'Pause');
     audio.addEventListener('pause', () => playBtn.textContent = 'Play');
 
-    // Play/Pause button handler
     playBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play();
@@ -372,22 +396,24 @@ Pretty much all gta games except the first top down ones</p>
       }
     });
 
-    // Skip backward 10s
     prevBtn.addEventListener('click', () => {
-      audio.currentTime = Math.max(0, audio.currentTime - 10);
+      currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+      loadTrack(currentTrackIndex);
+      audio.play();
     });
 
-    // Skip forward 10s
     nextBtn.addEventListener('click', () => {
-      audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+      currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+      loadTrack(currentTrackIndex);
+      audio.play();
     });
 
-    // Update seeker maximum when metadata loads
-    audio.addEventListener('loadedmetadata', () => {
-      seekBar.max = audio.duration;
+    audio.addEventListener('ended', () => {
+      currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+      loadTrack(currentTrackIndex);
+      audio.play();
     });
 
-    // Update progress bar and time during playback
     audio.addEventListener('timeupdate', () => {
       if (!isNaN(audio.duration)) {
         seekBar.max = audio.duration;
@@ -396,12 +422,10 @@ Pretty much all gta games except the first top down ones</p>
       }
     });
 
-    // Seek when user drags bar
     seekBar.addEventListener('input', () => {
       audio.currentTime = seekBar.value;
     });
 
-    // Volume Slider Handler
     volumeSlider.addEventListener('input', (e) => {
       audio.volume = e.target.value;
       if (audio.volume > 0 && audio.muted) {
@@ -410,13 +434,14 @@ Pretty much all gta games except the first top down ones</p>
       }
     });
 
-    // Mute Checkbox Handler
     muteCheckbox.addEventListener('change', (e) => {
       audio.muted = e.target.checked;
       if (!audio.muted) {
         audio.play();
       }
     });
+
+    loadTrack(0);
   </script>
 
 </body>
